@@ -1,0 +1,584 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{color}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Short title]{Randomized Computation} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Shuangjun Zhang} % Your name
+\institute[FDU] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+Fudan University \\ % Your institution for the title page
+\medskip
+\textit{zhangsj17@fudan.edu.cn} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+\section{Probabilistic Turing Machines}
+%------------------------------------------------
+\subsection{Polynomial Identity Testing}
+\begin{frame}
+\frametitle{Polynomial Identity Testing}
+Let A(x), B(x) be polynomials(over R) of degrees n\\
+\begin{itemize}
+	\item {\color{red} Question}: Is $A(x) = B(x)$?
+	\item {\color{red} Naive Idea}: Converting the two polynomials to their canonical forms($\Sigma_{i=0}^{n} a_{i}x^{i}$),two polynomials are equivalent iff all the coeficients in their canonical forms are equal.
+	\item {\color{red} Another Idea}: Reduce problem to checking zero’s of a polynomial.
+	$$
+	A(x) = B(x) \Rightarrow A(x) - B(x) = 0
+	$$
+	\begin{itemize}
+		\item If $A(x) = B(x)$, $\forall r \in R, A(r) - B(r) = 0$.  
+		\item If $A(x) \neq B(x)$, $A(x)-B(x) = 0$ has at most n roots.
+	\end{itemize}
+\end{itemize}
+
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Polynomial Identity Testing}
+	{\color{red} Algorithm PIT}:\\
+	{\color{red} Input}: A(x), B(x), with maximum degree is n\\
+	\begin{itemize}
+		\item Choose $r \in \{1,2,...,100n\}$ at random;
+		\item Computer A(r) and B(r);
+		\item If $A(r) \neq B(r)$ {\color{red} Return} 0;
+		\item else {\color{red} Return} 1;
+	\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Polynomial Identity Testing}
+	{\color{red} Analysis:}
+	\begin{itemize}
+		\item If $\exists$ r, s.t. A(r) $\neq$ B(r), then A(x) $\neq$ B(x),that is 
+		$$Pr[A(x) \neq B(x)|PIT() = 0] = 1$$
+		\item If $A(x) = B(x)$,then $\forall$ r, $A(r) = B(r)$,that is
+		$$Pr[PIT()=1|A(x) = B(x)] = 1$$
+		\item If $A(x) \neq B(x)$,then with probability at most 1/100, $A(r) = B(r)$, that is 
+		$$Pr[PIT()=1|A(x) \neq B(x)] \leq 1/100$$
+	\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\subsection{Probabilistic Turing Machines}
+\begin{frame}
+\frametitle{Probabilistic Turing Machines(PTM)}
+\begin{itemize}
+	\item So far, considered the following types of machines for input x:
+	\begin{itemize}
+		\item {\color{red} TM}: only one computation that either accepts or rejects
+		\item {\color{red} NTM}: there are many sequences of computation, and x accepted if there exists a sequence that accepts
+
+		\item {\color{red} ATM}: many sequences of computations, and x accepted based on the type of nodes ($\exists$ or $\forall$) along its path
+		\item {\color{red} OTM}:a TM with access to an oracle
+	\end{itemize}
+	\item Another kind of machine: {\color{red} Probabilistic Turing Machine}
+	\begin{itemize}
+		\item Very similar to a TM , except at each step, M could toss a coin to get a random bit, and decide which transition rule to follow based on the outcome of the coin toss
+	\end{itemize}
+	\item A PTM takes input x and a random bit string r
+	\item $Pr[M(x,r) = z]$: probability M outputs z
+\end{itemize}
+\end{frame}
+%-------------------------------------------------------------
+\subsection{Failure Probability}
+\begin{frame}
+\frametitle{Failure Probability}
+A major aspect of randomized algorithms or probabilistic machines is that they may fail to produce the desired output with some specified failure probability.
+
+\begin{itemize}
+	\item One-sided error
+	\begin{itemize}
+		\item The machine may err only in one direction  i.e. either on ‘yes’ instances or on ‘no’ instances.
+
+	\end{itemize}
+	\item Two-sided error
+	\begin{itemize}
+		\item The machine may err in both directions i.e. it may result a ‘yes’ instance as a ‘no’ instance and vice versa.
+
+	\end{itemize}
+	\item Zero-sided error
+	\begin{itemize}
+		\item The algorithm never provides a wrong answer.
+		\item But sometimes it returns 'don't know'
+	\end{itemize}
+\end{itemize}
+\end{frame}
+%------------------------------------------------------
+\section{Randomized Complexity Classes}
+\begin{frame}
+\frametitle{Randomized Complexity Classes}
+\begin{itemize}
+	\item {\color{red} RP} (Randomized Polynomial time)
+	\begin{itemize}
+		\item One-sided error
+
+	\end{itemize}
+	\item {\color{red} coRP} (complement of RP )
+	\begin{itemize}
+		\item One-sided error
+	\end{itemize}
+	\item {\color{red} BPP} (Bounded-error Probabilistic Polynomial time)
+	\begin{itemize}
+		\item Two-sided error
+	\end{itemize}
+	\item {\color{red} ZPP} (Zero-error Probabilistic Polynomial time)
+	\begin{itemize}
+		\item Zero error
+	\end{itemize}
+\end{itemize}
+\end{frame}
+%------------------------------------------------------
+\subsection{RP and coRP}
+\begin{frame}
+\frametitle{RP and coRP}
+	\begin{definition}[RP]
+		The complexity class RP is the class of all languages L for which there exists a polynomial PTM M such that
+
+		$$
+		x \in L \Rightarrow Pr[M(x) = 1] \geq 1/2
+		$$
+		$$
+		x \notin L \Rightarrow Pr[M(x) = 0] = 1
+		$$
+	\end{definition}
+	\begin{definition}[coRP]
+		The complexity class coRP is the class of all languages L for which there exists a polynomial PTM M such that
+
+		$$
+		x \in L \Rightarrow Pr[M(x) = 1] = 1
+		$$
+		$$
+		x \notin L \Rightarrow Pr[M(x) = 0] \geq 1/2
+		$$
+	\end{definition}
+\end{frame}
+%------------------------------------------------------
+\begin{frame}
+\frametitle{RP is in NP}
+\begin{theorem}
+	$$RP \subseteq NP$$
+\end{theorem}
+\begin{proof}
+	\begin{itemize}
+		\item Let L be a language in RP . Let M be a polynomial probabilistic Turing Machine that decides L.
+		\item If x $\in$ L, then there exists a sequence of coin tosses r such that M accepts x with r as the random string.
+
+		\item So we can consider r as a certificate instead of a random string. r can be verified in polynomial time by the same machine.
+		\item If x $\notin$ L, then $Pr[M(x) = 1] = 0$. So there is no certificate r s.t. $M(x, r) = 1$.
+		\item So, L $\in$ NP
+	\end{itemize}
+\end{proof}
+\end{frame}
+%------------------------------------------------------
+\begin{frame}
+\frametitle{Error Reduction for RP}
+\begin{itemize}
+	\item The constant 1/2 in the definition of RP can be replaced by any constant k, 0 < k < 1
+	\item Since the error is one-sided, we can repeat the algorithm t times independently:
+	\item Clearly, if x $\notin$ L, all t runs will return a 0
+	\item If x $\in$ L, if any of the t runs returns a 1, we return the correct answer.
+	\item If x $\in$ L, if all t runs returns 0, we make mistake
+	\item Pr[algorithm makes a mistake t times] $\leq \frac{1}{2^{t}}$
+	\item Thus, we can make the error exponentially small by polynomial number of repetitions.
+
+\end{itemize}
+\end{frame}
+%------------------------------------------------------
+\subsection{BPP}
+\begin{frame}
+\frametitle{Bounded-error Probabilistic Polynomial time}
+\begin{definition}[BPP]
+	The complexity class BPP is the class of all languages L for which there exists a polynomial PTM M such that
+	$$
+	x \in L \Rightarrow Pr[M(x) = 1] \geq 2/3
+	$$
+	$$
+	x \notin L \Rightarrow Pr[M(x) = 1] \leq 1/3
+	$$
+	M answers correctly with probability 2/3 on any input x regardless if x $\in$ L or x $\notin$ L
+\end{definition}
+P $\subseteq$ BPP $\subseteq$ EXP\\
+BPP = coBPP\\
+\end{frame}
+
+%-------------------------------------------------------
+\begin{frame}
+\frametitle{Error Reduction for BPP}
+\begin{itemize}
+	\item 2/3 is arbitrary and can be improved as follows:
+	\begin{itemize}
+		\item Repeat the algorithm t times, say it returns $X_{i}$ at the i-th run
+		\item Take majority answer, i.e., if $\geq$ t/2 times M returns 1, return 1, otherwise return 0
+
+	\end{itemize}
+	\item {\color{red} The Chernoff Bound}
+	\begin{itemize}
+		\item Suppose $X_{1},...,X_{t}$ are t independent random variables with values in $\{0, 1\}$ and for every i, $Pr[X_{i} = 1] = p$. Then
+		$$
+		Pr[\frac{1}{t}\sum_{i=1}^{t}X_{i}-p > \epsilon] < e^{-\epsilon^{2}\frac{t}{2p(1-p)}}
+		$$
+		$$
+		Pr[\frac{1}{t}\sum_{i=1}^{t}X_{i}-p < -\epsilon] < e^{-\epsilon^{2}\frac{t}{2p(1-p)}}
+		$$
+	\end{itemize}
+\end{itemize}
+\end{frame}
+%-------------------------------------------------------
+\begin{frame}
+\frametitle{Error Reduction for BPP}
+\begin{itemize}
+	\item x $\in$ L, $Pr[X_{i} = 1] = p \geq 2/3$, M outputs correctly if $\sum_{i=1}^{t}X_{i} \geq t/2$
+	\item The algorithm makes a mistake when $\sum_{i=1}^{t}X_{i} < t/2$
+	\item Pr[Algorithm outputs the wrong answer on x]\\
+	$= Pr[\sum_{i=1}^{t}X_{i} < t/2]$\\
+	$= Pr[\frac{1}{t}\sum_{i=1}^{t}X_{i} < 1/2]$\\
+	$= Pr[\frac{1}{t}\sum_{i=1}^{t}X_{i}-p < 1/2-p]$\\
+	$< e^{-(\frac{1}{2}-p)^{2}\frac{t}{2p(1-p)}}$\\
+	$\leq e^{-2t(\frac{1}{2}-p)^{2}}$\\
+	$\leq e^{-2t(\frac{1}{2}-\frac{2}{3})^{2}}$\\
+	$= e^{-ct}$, where c is some constant\\
+	$= \frac{1}{2^{n}}$ if we set $t = \frac{n \ln 2}{c} = O(n)$\\
+	\item So by running the algorithm O(n) times, reduce probability exponentially.
+\end{itemize}
+\end{frame}
+%-------------------------------------------------------
+\begin{frame}
+\frametitle{Another Definition of BPP}
+\begin{definition}[BPP]
+	The complexity class BPP is the class of all languages L for which there exists a polynomial PTM M such that
+	$$
+	x \in L \Rightarrow Pr[M(x) = 1] \geq 1-\frac{1}{2^{|x|}}
+	$$
+	$$
+	x \notin L \Rightarrow Pr[M(x) = 1] \leq \frac{1}{2^{|x|}}
+	$$
+	M answers correctly with probability $1-\frac{1}{2^{|x|}}$ on any input x regardless if x $\in$ L or x $\notin$ L
+\end{definition}
+RP $\cup$ coRP $\subseteq$ BPP.\\
+We have showed that $RP \subseteq NP$, But We don't know if $BPP \subseteq NP$
+\end{frame}
+
+%-------------------------------------------------------
+\subsection{ZPP}
+\begin{frame}
+\frametitle{Zero-error Probabilistic Polynomial time}
+\begin{definition}[ZPP]
+	The complexity class ZPP is the class of all languages L for which there exists a polynomial PTM M such that
+	$$
+	x \in L \Rightarrow M(x)=1\ or\ M(x) =\ 'Don't\ know'
+	$$
+	$$
+	x \notin L \Rightarrow M(x)=0\ or\ M(x) =\ 'Don't\ know'
+	$$
+	$$
+	\forall x, Pr[M(x) = \ 'Don't\ know'] \leq 1/2
+	$$
+	Whenever M answers with a 0 or a 1, it answers correctly. If M is not sure, it'll output a 'Don't know'. On any input x, it outputs 'Don't know' with probability at most 1/2.
+\end{definition}
+\end{frame}
+%-------------------------------------------------------
+\begin{frame}
+\frametitle{Another Definition of ZPP}
+{\color{red} Algorithm M'}:\\
+{\color{red} Input}:x\\
+while(1):\\
+\begin{itemize}
+	\item Invoke M to determine x $\in$ L or not;
+	\item If b = M(x), {\color{red} ouput} b and halt;
+	\item else continue;
+\end{itemize}
+If the running time of M is T(|x|), the expecting running time of M is 2T(|x|). 
+\begin{definition}[ZPP]
+	The complexity class ZPP is the class of all languages L for which there exists a expecting polynomial PTM M such that
+	$$
+	x \in L \Rightarrow M(x)=1
+	$$
+	$$
+	x \notin L \Rightarrow M(x)=0
+	$$
+\end{definition}
+\end{frame}
+%-------------------------------------------------------
+\begin{frame}
+\frametitle{A Theorem on ZPP}
+\begin{theorem}
+	ZPP = RP $\cap$ coRP
+\end{theorem}
+\begin{itemize}
+	\item This theorem is surprising, since the corresponding question for nondeterministic(i.e. P = NP $\cap$ coNP) is open.
+	\item We have to prove both ways:
+	$$
+	ZPP \subseteq RP \cap coRP
+	$$
+	$$
+	RP \cap coRP \subseteq ZPP
+	$$
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{First direction}
+$$
+ZPP \subseteq RP \cap coRP
+$$
+\begin{itemize}
+	\item We prove ZPP $\subseteq$ coRP, the other proof is similar
+	\item Let L $\in$ ZPP. Then $\exists$ PTM M that, $\forall$ x, either correctly decides x $\in$ L or outputs 'Don't know'
+	\item Let M' be the Turing Machine that on input x, returns 1 if M(x) ='Don't know' and otherwise returns M(x).
+	\begin{itemize}
+		\item x $\in$ L: M(x) = 1 or M(x) ='Don't know', so M'(x) = 1.
+
+		\item x $\notin$ L: M(x) = 0, which is correct, or M(x) = 'Don't know' where M'(x)  returns incorrectly with probability $\leq$ 1/2
+	\end{itemize}
+	\item So L $\in$ coRP, and ZPP $\subseteq$ coRP
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Other direction}
+$$
+RP \cap coRP \subseteq ZPP
+$$
+\begin{itemize}
+	\item L $\in$ RP $\cap$ coRP. Then there exist two TM's s.t.:
+	\begin{itemize}
+		\item $M_{1}(x) = 1$ if x $\in$ L. Incorrect for x $\notin$ L with prob. $\leq$ 1/2
+		\item $M_{2}(x) = 0$ if x $\notin$ L. Incorrect for x $\in$ L with prob. $\leq$ 1/2
+	\end{itemize}
+	\item Construct a PTM M' which works as follows on M'(x):
+	\begin{itemize}
+		\item Run $M_{1}(x)$, and if $M_{1}(x) = 0$, return $x \notin$ L
+		\item Run $M_{2}(x)$, and if $M_{2}(x) = 1$, return $x \in$ L
+		\item Else return 'Don't know'
+	\end{itemize}
+	\item {\color{red} Claim}: If M'(x) returns a 0 or a 1, it is correct.
+
+	\item {\color{red} Claim}: M'(x) returns 'Don't know' with prob. $\leq$ 1/2
+	\begin{itemize}
+		\item Assume x $\in$ L. 
+		\item Pr[M' return 'Don't know'] = Pr[$M_{1}(x)$ = 1 $\land$ $M_{2}(x)$ = 0] \\
+		= Pr[$M_{2}(x)$ = 0] $\leq$ 1/2
+		\item The case for x $\notin$ L similar 
+	\end{itemize}
+	\item So, L $\in$ ZPP
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\section{Relationship Between BPP and Ohter Class}
+\subsection{BPP is in P/poly}
+\begin{frame}
+\frametitle{BPP is in P/poly}
+\begin{theorem}
+	BPP $\subseteq$ P/poly
+\end{theorem}
+Proof:
+\begin{itemize}
+	\item L $\in$ BPP. Define L(x), L(x) = 1 if x $\in$ L, else L(x) = 0
+	\item $\exists$ A PTM M on input x $\in$ $\{0,1\}^{n}$, use m random bits s.t.\\
+	$\forall$ x $\in$ $\{0,1\}^{n}$, Pr[M(x, r) $\neq$ L(x)] $\leq$ $2^{-n-1}$
+	\item Say r $\in$ $\{0,1\}^{m}$ is bad for an input x $\in$ $\{0,1\}^{n}$ if M(x, r) $\neq$ L(x), otherwise call r good for x
+	\item $\forall$ x, at most $\frac{2^{m}}{2^{n+1}}$ string r are bad for x
+	\item Adding over all x $\in$ $\{0,1\}^{n}$ there are at most $2^{n}\frac{2^{m}}{2^{n+1}} = 2^{m}/2$  string r are bad
+	\item So, $\exists$ $r_{0} \in \{0,1\}^{m}$ good for every x $\in$ $\{0,1\}^{n}$
+	\item We can use $r_{0}$ as a advice, so L $\in$ P/poly
+\end{itemize}
+\end{frame}
+
+%-----------------------------------------------
+\subsection{BPP is in PH}
+\begin{frame}
+\frametitle{BPP is in PH}
+\begin{theorem}
+BPP $\subseteq$ $\Sigma_{2} \cap \Pi_{2}$
+\end{theorem}
+\begin{itemize}
+	\item First, we prove BPP $\subseteq \Sigma_{2}$ 
+	\item Suppose L $\in$ BPP, then $\exists$ ppt M for L s.t.
+	$$
+	x \in L \Rightarrow Pr[M(x, r) = 1] \geq 1-2^{-n}
+	$$
+	$$
+	x \notin L \Rightarrow Pr[M(x, r) = 1] \leq 2^{-n}
+	$$
+	|r| = m = poly(n)
+	\item for x $\in$ $\{0,1\}^{n}$, let $S_{x}$ denote the set of r's for which M(x,r) = 1. Then:
+	$$
+	x \in L \Rightarrow |S_{x}| \geq (1-2^{-n})2^{m}
+	$$
+	$$
+	x \notin L \Rightarrow |S_{x}| \leq (2^{-n})2^{m}
+	$$
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{BPP is in PH}
+\begin{itemize}
+	\item For a set S $\subseteq \{0, 1\}^{m}$ and a string u $\in \{0, 1\}^{m}$. Define $S+u = \{x+u:x \in S\}$. Let $k = \lceil \frac{m}{n} \rceil +1$, we have the following two claims.
+	\item {\color{red} Claim 1}: For every set  S $\subseteq \{0, 1\}^{m}$ with $|S| \leq 2^{m-n}$ and every k vectors $u_{1},...,u_{k}$, $\cup_{i=1}^{k}(S+u_{i}) \neq \{0, 1\}^{m}$
+	\item {\color{red} Proof of Claim 1}: 
+	\begin{itemize}
+		\item Since |S+$u_{i}$| = |S|, $|\cup_{i=1}^{k}(S+u_{i})|$ $\leq$ k|S+$u_{i}$| = k|S| < $2^{m}$(for sufficiently large n)
+	\end{itemize}
+	\item {\color{red} Claim 2}: For every set S $\subseteq \{0, 1\}^{m}$ with $|S| \geq (1-2^{-n})2^{m}$, there exists $u_{1},...,u_{k}$, s.t. $\cup_{i=1}^{k}(S+u_{i}) = \{0, 1\}^{m}$
+\end{itemize}
+
+\end{frame}
+%--------------------------------------------------
+\begin{frame}
+\frametitle{BPP is in PH}
+{\color{red} Proof of Claim 2}: 
+\begin{itemize}
+	\item We claim if $u_{1},...,u_{k}$ are chosen independently at random then Pr[$\cup_{i=1}^{k}(S+u_{i}) = \{0, 1\}^{m}$] > 0 
+	\item For r $\in \{0, 1\}^{m}$, let $B_{r}$ denote the "bad event" r $\notin$ $\cup_{i=1}^{k}(S+u_{i})$. It's suffice to show $Pr[\exists r \in \{0, 1\}^{m}\ B_{r}] < 1$
+	\item $Pr[\exists r \in \{0, 1\}^{m}\ B_{r}]$ $\leq$ $\sum_{r \in \{0, 1\}^{m}}Pr[B_{r}] \leq 2^{m}max\{Pr[B_{r}]\}$\\
+	we should only prove $\forall$ r, $Pr[B_{r}] < 2^{-m}$
+	\item Let $B_{r}^{i}$ denote the event r $\notin$ $S+u_{i}$(equivalently, $r+u_{i} \notin S$), then $B_{r} = \cap_{i \in [k]} B_{r}^{i}$\\
+	\item $r+u_{i}$ is a uniform element in $\{0,1\}^{m}$, it will be in  S with probability at least 1-$2^{-n}$. So, 
+	$$
+	Pr[B_{r}^{i}] = Pr[r+u_{i} \notin S] = 1-Pr[r+u_{i} \notin S] \leq 2^{-n}
+	$$ 
+	\item Since the events $B_{r}^{i}$ are independent, we have
+	$$Pr[Br] = Pr[\cap_{i \in [k]} B_{r}^{i}] = Pr[B_{r}^{i}]^{k} \leq 2^{-nk} < 2^{-m}$$ 
+\end{itemize}
+\end{frame}
+%--------------------------------------------------
+\begin{frame}
+\frametitle{BPP is in PH}
+
+\begin{itemize}
+	\item {\color{red} Claim 1}: For every set  S $\subseteq \{0, 1\}^{m}$ with $|S| \leq 2^{m-n}$ and every k vectors $u_{1},...,u_{k}$, $\cup_{i=1}^{k}(S+u_{i}) \neq \{0, 1\}^{m}$
+	\item {\color{red} Claim 2}: For every set S $\subseteq \{0, 1\}^{m}$ with $|S| \leq (1-2^{-n})2^{m}$, there exists $u_{1},...,u_{k}$, s.t. $\cup_{i=1}^{k}(S+u_{i}) = \{0, 1\}^{m}$
+	\item Together with Claim 1 and 2, we know:
+	\begin{itemize}
+		\item x $\in$ L $\Rightarrow$ $|S_{x}| \geq (1-2^{-n})2^{m}$ \\
+		$\Rightarrow$ $\exists$ $u_{1}, ...,u_{k}$ $\in$ $\{0,1\}^{m}$ $\forall$ r $\in$ $\{0,1\}^{m}$ r $\in$ $\cup_{i=1}^{k}(S_{x}+u_{i})$
+		\item x $\notin$ L $\Rightarrow$ $|S_{x}| \leq 2^{m-n}$ \\
+		$\Rightarrow$ $\forall$ $u_{1}, ...,u_{k}$ $\in$ $\{0,1\}^{m}$ $\exists$ r $\in$ $\{0,1\}^{m}$ r $\notin$ $\cup_{i=1}^{k}(S_{x}+u_{i})$
+		\item Whether r $\in$ $\cup_{i=1}^{k}(S_{x}+u_{i})$ or not can be decided in polynomial time.
+	\end{itemize} 
+	\item So, L $\in$ $\Sigma_{2}$, BPP $\subseteq$ $\Sigma_{2}$
+	\item L $\in$ BPP $\Rightarrow$ $\overline{L} \in coBPP = BPP$ $\Rightarrow$ $\overline{L} \in \Sigma_{2}$ $\Rightarrow$ $L \in co\Sigma_{2} = \Pi_{2}$
+	\item So, BPP $\subseteq$ $\Pi_{2}$, BPP $\subseteq$ $\Sigma_{2} \cap \Pi_{2}$
+\end{itemize}
+\end{frame}
+%--------------------------------------------------
+\subsection{Unsolved Problem about BPP}
+\begin{frame}
+\frametitle{Unsolved Problem about BPP}
+\begin{itemize}
+	\item BPP = P?
+	\item Complete problem for BPP?
+	\item Does BPTIME have a hierarchy theorem?
+\end{itemize}
+\end{frame}
+\begin{frame}
+\Huge{\centerline{The End}}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 

@@ -1,0 +1,8 @@
+\beamer@sectionintoc {1}{The Polynomial-Time Hierarchy (PH)}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Alternation of Quantifiers}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Collapse of the Polynomial-time Hierarchy}{6}{0}{1}
+\beamer@subsectionintoc {1}{3}{Complete problems for levels of PH}{8}{0}{1}
+\beamer@subsectionintoc {1}{4}{Definition the PH via Oracle Machine}{11}{0}{1}
+\beamer@sectionintoc {2}{Non-uniform Polynomial Time (P/poly)}{19}{0}{2}
+\beamer@subsectionintoc {2}{1}{Boolean Circuits}{19}{0}{2}
+\beamer@subsectionintoc {2}{2}{Machines That Take Advice}{21}{0}{2}

@@ -1,0 +1,71 @@
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\beamer@sectionpages {1}{2}}
+\headcommand {\beamer@subsectionpages {1}{2}}
+\headcommand {\sectionentry {1}{The Polynomial-Time Hierarchy (PH)}{3}{The Polynomial-Time Hierarchy (PH)}{0}}
+\headcommand {\beamer@subsectionpages {3}{2}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{3}{Alternation of Quantifiers}}
+\headcommand {\slideentry {1}{1}{1}{3/3}{Alternation of Quantifiers}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\slideentry {1}{1}{2}{4/4}{Alternation of Quantifiers}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\slideentry {1}{1}{3}{5/5}{Alternation of Quantifiers}{0}}
+\headcommand {\beamer@framepages {5}{5}}
+\headcommand {\beamer@subsectionpages {3}{5}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{6}{Collapse of the Polynomial-time Hierarchy}}
+\headcommand {\slideentry {1}{2}{1}{6/6}{Collapse of the Polynomial-time Hierarchy}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\slideentry {1}{2}{2}{7/7}{Collapse of the Polynomial-time Hierarchy}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\beamer@subsectionpages {6}{7}}
+\headcommand {\beamer@subsectionentry {0}{1}{3}{8}{Complete problems for levels of PH}}
+\headcommand {\slideentry {1}{3}{1}{8/8}{Complete problems for levels of PH}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\slideentry {1}{3}{2}{9/9}{Complete problems for levels of PH}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {1}{3}{3}{10/10}{Complete problems for levels of PH}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\beamer@subsectionpages {8}{10}}
+\headcommand {\beamer@subsectionentry {0}{1}{4}{11}{Definition the PH via Oracle Machine}}
+\headcommand {\slideentry {1}{4}{1}{11/11}{Definition the PH via Oracle Machine}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\slideentry {1}{4}{2}{12/12}{Definition the PH via Oracle Machine}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\slideentry {1}{4}{3}{13/13}{Definition the PH via Oracle Machine}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\slideentry {1}{4}{4}{14/14}{Definition the PH via Oracle Machine}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\slideentry {1}{4}{5}{15/15}{Definition the PH via Oracle Machine}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\slideentry {1}{4}{6}{16/16}{Definition the PH via Oracle Machine}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\slideentry {1}{4}{7}{17/17}{Definition the PH via Oracle Machine}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\slideentry {1}{4}{8}{18/18}{Definition the PH via Oracle Machine}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\beamer@sectionpages {3}{18}}
+\headcommand {\beamer@subsectionpages {11}{18}}
+\headcommand {\sectionentry {2}{Non-uniform Polynomial Time (P/poly)}{19}{Non-uniform Polynomial Time (P/poly)}{0}}
+\headcommand {\beamer@subsectionpages {19}{18}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{19}{Boolean Circuits}}
+\headcommand {\slideentry {2}{1}{1}{19/19}{Boolean Circuits}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\slideentry {2}{1}{2}{20/20}{Boolean Circuits}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\beamer@subsectionpages {19}{20}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{21}{Machines That Take Advice}}
+\headcommand {\slideentry {2}{2}{1}{21/21}{Machines That Take Advice}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\slideentry {2}{2}{2}{22/22}{Machines That Take Advice}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\slideentry {2}{2}{3}{23/23}{Machines That Take Advice}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\slideentry {2}{2}{4}{24/24}{Machines That Take Advice}{0}}
+\headcommand {\beamer@framepages {24}{24}}
+\headcommand {\beamer@partpages {1}{24}}
+\headcommand {\beamer@subsectionpages {21}{24}}
+\headcommand {\beamer@sectionpages {19}{24}}
+\headcommand {\beamer@documentpages {24}}
+\headcommand {\gdef \inserttotalframenumber {24}}

@@ -1,0 +1,421 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Short title]{Variations on P and NP} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Shuangjun Zhang} % Your name
+\institute[FDU] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+Fudan University \\ % Your institution for the title page
+\medskip
+\textit{zhangsj17@fudan.edu.cn} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+\section{The Polynomial-Time Hierarchy (PH)}
+%------------------------------------------------
+\subsection{Alternation of Quantifiers}
+\begin{frame}
+\frametitle{Alternation of Quantifiers}
+\begin{definition}[The class $\Sigma_{k}$]
+	For a natural number $k$, a decision problem $S \subseteq \{0,1\}^{*}$ is in $\Sigma_{k}$ if there exists a polynomial $p$ and a polynomial-time algorithm $V$ such that $x \in S$ if and only if 
+	$$
+	\exists y_{1} \in \{0,1\}^{p(|x|)} \forall y_{2} \in \{0,1\}^{p(|x|)} \exists y_{3} \in \{0,1\}^{p(|x|)}...Q_{k} y_{k} \in \{0,1\}^{p(|x|)}
+	$$
+	$s.t. V(x,y_{1},...,y_{k}) = 1$
+\end{definition}
+Note That $\Sigma_{1} = NP$ and $\Sigma_{0} = P$.\\
+The Polynomial-time Hierarchy, denoted $PH$, is the union of all the aforementioned classes(i.e., $PH = \cup_{k}\Sigma_{k}$)
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Example}
+	INDSET = \{<G,k>: $\exists$ S $\subseteq$ V(G) s.t. |S| $\geq$ k and $\forall$ u,v $\in$ S, uv $\notin$ E(G)\}\\
+	INDSET $\in$ NP, the witness is S.\\
+	EXACT INDSET = \{<G,k>: the largest independent set in G has size exactly k\}\\
+	<G,k> $\in$ EXACT INDSET $\Leftrightarrow$ $\exists$ a size-k subset S of V(G) and $\forall$ size greater than k subset S', S is an independent set in G and S' is not.\\
+	So, EXACT INDSET $\in$ $\Sigma_{2}$
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Alternation of Quantifiers}
+\begin{definition}[The class $\Pi_{k}$]
+$\Pi_{k} = co\Sigma_{k}$,where $co\Sigma_{k} = \{\{0,1\}^{*} \backslash S:S \in \Sigma_{k}\}$
+\end{definition}
+Note $\Pi_{1} = coNP$
+\begin{theorem}
+For every $k \geq 0$, a set $S$ is in $\Sigma_{k+1}$ if and only if there exists a polynomial $p$ and a set $S' \in \Pi_{k}$ such that $S =\{x : \exists y \in \{0, 1\}^{p(|x|)} s.t. (x, y) \in S'\}$.
+\end{theorem}
+if $PH = P$, then $P = NP$\\
+$\Sigma_{k} \subseteq \Pi_{k+1} \subseteq \Sigma_{k+2}$
+\end{frame}
+%------------------------------------------------
+\subsection{Collapse of the Polynomial-time Hierarchy}
+\begin{frame}
+\frametitle{Collapse of the Polynomial-time Hierarchy}
+We believe that $P \neq NP$ and $NP \neq coNP$. It is commonly conjectured that$\Sigma_{k} \neq \Pi_{k}$, for all $k \in N$
+\begin{theorem}
+For every $k \geq 1$,if $\Sigma_{k} = \Pi_{k}$ then $\Sigma_{k+1} = \Sigma_{k}$, which in turn implies $PH = \Sigma_{k}$
+\end{theorem}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Collapse of the Polynomial-time Hierarchy}
+\begin{proof}
+For any set $S$ in $\Sigma_{k+1}$, $\exists p$ and a set $S' \in \Pi_{k}$ such that $S =\{x : \exists y \in \{0, 1\}^{p(|x|)} s.t. (x, y) \in S'\}$\\
+Using the hypoyhesis, $S' \in \Sigma_{k}$, So,$\exists p'$ and a set $S'' \in \Pi_{k-1}$ such that $S' =\{x' : \exists y' \in \{0, 1\}^{p'(|x'|)} s.t. (x', y') \in S''\}$\\
+it follows that $S =\{x : \exists y \in \{0, 1\}^{p(|x|)} \exists z \in \{0, 1\}^{p'(|(x,y)|)} s.t. ((x, y),z) \in S''\}$\\
+By collapsing the two adjacent existential quantifier, we conclude that $S \in \Sigma_{k}$\\
+
+If $\Sigma_{k+1} = \Sigma_{k}$($\Pi_{k+1} = \Pi_{k}$),\\
+For any set $S$ in $\Sigma_{k+2}$, $\exists p$ and a set $S' \in \Pi_{k+1}$ such that $S =\{x : \exists y \in \{0, 1\}^{p(|x|)} s.t. (x, y) \in S'\}$\\
+$S' \in \Pi_{k+1} = \Pi_{k}$, so, $S \in \Sigma_{k+1}$, thus, $\Sigma_{k+2} = \Sigma_{k+1}$, and similarly $\Sigma_{j+2} = \Sigma_{j+1}$ for all $j \geq k$, Thus $\Sigma_{k+1} = \Sigma_{k}$ implies $PH = \Sigma_{k}$
+\end{proof}
+if $\Sigma_{1} = \Sigma_{0}$, then $PH = \Sigma_{0} = P$
+\end{frame}
+%-------------------------------------------------------------
+\subsection{Complete problems for levels of PH}
+\begin{frame}
+\frametitle{Complete problems for levels of PH}
+\begin{definition}[$\Sigma_{i}$-complete]
+	A language $L$ is $\Sigma_{i}$-complete, if $L \in \Sigma_{i}$ and $\forall L^{'} \in \Sigma_{i}$,$L' \leq_{p} L$.
+\end{definition}
+\begin{example}[$\Sigma_{i}$-complete problem]
+	$\Sigma_{i}SAT = \exists u_{1} \forall u_{2} ... Q_{i}u_{i} \phi (u_{1},u_{2},...,u_{i}) = 1$
+\end{example}
+Notice that 	$\Sigma_{i}SAT$ is a special case of TQBF.
+\end{frame}
+%------------------------------------------------------
+\begin{frame}
+\frametitle{Complete problems for levels of PH}
+\begin{theorem}
+	If there exists a language L that is PH-complete. then there exists an i such that PH = $\Sigma_{i}$.
+\end{theorem}
+\begin{proof}
+	L $\in$ PH = $\Sigma_{0} \cup \Sigma_{1} \cup \Sigma_{2} \cup ...$\\
+	So, $\exists$ i, L $\in \Sigma_{i}$.\\
+	Since L is PH-complete, We can reduce every language of PH to L.\\
+	But L $\in \Sigma_{i}$, $\forall$ L' $\in$ PH, if $L' \leq_{p} L$ then $L' \in \Sigma_{i}$\\
+	(...$\Sigma_{i-2}$ $\subseteq$ $\Pi_{i-1}$ $\subseteq$ $\Sigma_{i}$ $\subseteq$ $\Pi_{i+1}$ $\subseteq$ $\Sigma_{i+2}$...)\\
+	We have PH $\subseteq$ $\Sigma_{i}$, So, PH = $\Sigma_{i}$.
+\end{proof}
+\end{frame}
+%------------------------------------------------------
+\begin{frame}
+\frametitle{PH = PSPACE?}
+	$\forall$ i, $\Sigma_{i} \subseteq $ PSPACE\\
+	PH $\subseteq$ PSPACE\\
+	PH = PSPACE?\\
+	If PH = PSPACE, then TQBF will be PH-complete.\\
+	
+\end{frame}
+%------------------------------------------------------
+\subsection{Definition the PH via Oracle Machine}
+\begin{frame}
+\frametitle{Oracle Turing Machine (OTM)}
+Define an OTM $M^{O}$ as:\\
+\begin{itemize}
+	\item M is just a Turing Machine with normal computation.
+	\item M also has access to an Oracle, denoted by O.
+	\begin{itemize}
+		\item M can ask any question to O during its computation.
+		\item O always answers correctly and in constant time.
+	\end{itemize}
+	\item $M^{O}(x)$:Output of $M^{O}$ on input x.
+\end{itemize}
+\begin{definition}[$P^{A}$ and $NP^{A}$]
+	$P^{A}$ is the class of languages decidable with a polynomial time oracle Turing machine that uses oracle A. Define the class $NP^{A}$ similarly.
+\end{definition}
+For example, NP $\subseteq$ $P^{SAT}$
+\end{frame}
+%------------------------------------------------------
+\begin{frame}
+\frametitle{Oracle Turing Machine (OTM)}
+Define $C_{1}^{C_{2}}$: M is a TM that is in complexity class $C_{1}$.
+\begin{itemize}
+	\item $P^{NP}$: a DTM with access to oracle in class NP.
+	\begin{itemize}
+		\item $P^{NP}$ = $P^{SAT}$.
+	\end{itemize}
+	\item $P^{P}$: a DTM with access to oracle in class P.
+	\begin{itemize}
+		\item $P^{P}$ = P.
+	\end{itemize}
+	\item $NP^{NP}$: a NTM with access to oracle in class NP.
+	\begin{itemize}
+		\item Clearly NP $\subseteq$ $NP^{NP}$.
+		\item Question: $NP^{NP}$ $\subseteq$ NP?\\
+	\end{itemize}
+\end{itemize}
+
+\end{frame}
+%------------------------------------------------------
+\begin{frame}
+\frametitle{Oracle Turing Machine (OTM)}
+\begin{theorem}
+	$\overline{SAT} \in P^{SAT}$
+\end{theorem}
+\begin{proof}
+	To decide if formula $\phi$ is unsatisfiable, M asks oracle SAT if $\phi \in SAT$ and gives its opposite answer.
+\end{proof}
+Therefore: $coNP \subseteq P^{NP} \subseteq NP^{NP}$, if $NP^{NP}$ $\subseteq$ NP, then coNP $\subseteq$ NP.\\
+\end{frame}
+
+%-------------------------------------------------------
+\begin{frame}
+\frametitle{Definition the PH via Oracle Machine}
+Now we can define the polynomial heirarchy another way!
+$$
+\Sigma_{1} = NP
+$$
+$$
+\Pi_{1} = coNP
+$$
+$$
+\Sigma_{2} = NP^{NP}
+$$
+$$
+\Pi_{2} = coNP^{NP}
+$$
+$$
+\Sigma_{i} = NP^{\Sigma_{i-1}}
+$$
+$$
+\Pi_{i} = coNP^{\Sigma_{i-1}}
+$$
+Claim: The above relations are correct.
+\end{frame}
+%-------------------------------------------------------
+\begin{frame}
+\frametitle{Definition the PH via Oracle Machine}
+\begin{theorem}
+	$\forall i \geq 2$,  $\Sigma_{i} = NP^{\Sigma_{i-1}}$, where the latter class denotes the set of languages decided by the polynomial-time NTM ’s with access to the oracle $\Sigma_{i-1}$.
+
+\end{theorem}
+\begin{itemize}
+	\item We will only prove for $\Sigma_{2} = NP^{NP} = NP^{SAT}$.
+	\item We have to prove both ways:
+	$$
+	L \in \Sigma_{2} \Rightarrow L \in NP^{SAT}
+	$$
+	$$
+	L \in NP^{SAT} \Rightarrow  L \in \Sigma_{2}
+	$$
+\end{itemize}
+\end{frame}
+%-------------------------------------------------------
+\begin{frame}
+\frametitle{First direction}
+$$
+L \in \Sigma_{2} \Rightarrow L \in NP^{SAT}
+$$
+\begin{itemize}
+	\item Suppose that $L \in \Sigma_{2}$,then $\exists$ PDTM M s.t.
+	$$
+	x \in L \Leftrightarrow \exists u_{1} \forall u_{2} M(x, u_{1}, u_{2}) = 1
+	$$
+	\item Fixing $u_{1}$, "$\forall u_{2}$ $M(x \circ u_{1}, u_{2}) = 1$" is in coNP.
+	\item Consider a NTM N with coNP as an oracle.
+	\item Guess $u_{1}$,  and use oracle to decide $\forall u_{2}$ $M(x \circ u_{1}, u_{2}) = 1$
+	\item L $\in$ $NP^{coNP}$ = $NP^{\overline{SAT}}$ = $NP^{SAT}$
+\end{itemize}
+\end{frame}
+%-------------------------------------------------------
+\begin{frame}
+\frametitle{Other direction}
+$$
+L \in NP^{SAT} \Rightarrow  L \in \Sigma_{2}
+$$
+\begin{itemize}
+	\item Suppose L is decidable by a polynomial-time NDTM N with oracle access to SAT.
+	\item x is in L iff there exists a sequence of nondeterministic choice and correct oracle answers that makes N accept x. That is there is a sequence of choice $c_{1}, c_{2}, ..., c_{m} \in \{0,1\}$ and answers to oracle queries $a_{1},...,a_{k} \in \{0,1\}$ s.t. if N uses the choice $c_{1}, c_{2}, ..., c_{m}$ in its execution and receives $a_{i}$ as the answer to its ith query, then:
+	\begin{itemize}
+		\item (1). N reaches the $q_{accept}$.
+		\item (2). All the answer are correct.
+	\end{itemize}
+	\item Let $\phi_{i}$ denote the ith query that M makes to its oracle.
+	\item The condition(2) can be phrased as follow:
+	\begin{itemize}
+		\item If $a_{i} = 1$, then $\exists$ $u_{i}$ s.t. $\phi_{i}(u_{i}) = 1$
+		\item If $a_{i} = 0$, then $\forall$ $v_{i}$ s.t. $\phi_{i}(v_{i}) = 0$
+	\end{itemize}
+\end{itemize}
+\end{frame}
+%-------------------------------------------------------
+\begin{frame}
+\frametitle{Other direction}
+Thus, we have that\\
+x $\in$ L $\Leftrightarrow$ $\exists$ $c_{1},...,c_{m},a_{1},...,a_{k},u_{1},...,u_{k}$ $\forall$ $v_{1},...,v_{k}$ s.t.\\
+N accept x using choices $c_{1},...,c_{m}$ and answers $a_{1},...,a_{k}$ AND\\
+$\forall i \in [k]$ if $a_{i} = 1$ then $\phi_{i}(u_{i}) = 1$\\
+$\forall i \in [k]$ if $a_{i} = 0$ then $\phi_{i}(v_{i}) = 0$\\
+This implies $L \in \Sigma_{2}$.\\
+So, $\Sigma_{2} = NP^{NP}$, $\Sigma_{3} = NP^{NP^{NP}}$ and so on.\\
+\end{frame}
+%-------------------------------------------------------
+\section{Non-uniform Polynomial Time (P/poly)} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+
+\subsection{Boolean Circuits} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+
+\begin{frame}
+\frametitle{Boolean Circuits}
+\begin{definition}[Boolean Circuits]
+	A Boolean circuit is a directed acyclic graph with internal nodes marked by elements of {$\land$,$\lor$,$\lnot$}. Nodes with no in-going edges are called input nodes, and nodes with no out-going edges are called output nodes.
+\end{definition}
+{\bfseries Bounded fan-in}. We will be most interested in circuits in which each gate has at most two incoming edges.\\
+For concreteness and simplicity, we assume throughout this section that all circuits have bounded fan-in.
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Boolean Circuits}
+\begin{theorem}[circuit evaluation]
+There exists a polynomial-time algorithm that, given a circuit $C: \{0,1\}^{n} \rightarrow \{0,1\}^{m}$ and an $n$-bit long string $x$, returns $C(x)$.
+\end{theorem}
+\begin{definition}[family of circuits computes a function]
+We say that a family of circuits $\{C_{n}\}_{n \in N}$computes a function $f: \{0,1\}^{*} \rightarrow \{0,1\}^{*}$ if for every $n$ the circuit $C_{n}$ computes the restriction of $f$ to strings of length $n$. In other words, for every $x \in \{0,1\}^{*}$, it must hold that $C_{|x|}(x)=f(x)$.
+\end{definition}
+The size of a circuit is defined as the number of edges.
+\end{frame}
+
+%------------------------------------------------
+\subsection{Machines That Take Advice}
+
+\begin{frame}
+\frametitle{Machines That Take Advice}
+\begin{definition}[Machines That Take Advice]
+We say that a function $f$ is computed in polynomial time with advice of length $l : N \rightarrow N$ if these exists a polynomial-time algorithm $A$ and an infinite advice sequence $(a_{n})_{n \in N}$ such that \\
+1. For every $x \in \{0,1\}^{*}$, it holds that $A(x, a_{|x|}) = f(x)$.\\
+2. For every $n \in N$, it holds that $|a_{n}| = l(n)$. 
+\end{definition}
+
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Machines That Take Advice}
+\begin{definition}[P/poly]
+We say that a computational problem can be solved in polynomial time with advice of length $l$ if a function solving this problem can be computed within these resources.We denote by $P/l$ the class of decision problems that can be solved in polynomial time with advice of length $l$, and by $P/poly$ the union of $P/p$ taken over all polynomials $p$.
+\end{definition}
+Clearly, $P/0 = P$
+\end{frame}
+
+%-----------------------------------------------
+\begin{frame}
+\frametitle{The Power of Advice}
+\begin{theorem}[The Power of Advice]
+There exist functions that can be computed using one-bit advice but cannot be computed without advice.
+\end{theorem}
+\begin{proof}
+Starting with any uncomputable Boolean function $f : N \rightarrow \{0, 1\}$,consider the function $f'$ defined as $f'(x) = f(|x|)$.Note that $f$ is Turing-reducible to $f'$ (e.g.,on input n make any n-bit query to $f'$, and return the answer).Thus, $f'$ cannot be
+computed without advice. On the other hand, $f'$ can be easily computed by using the advice sequence $(a_{n})_{n \in N}$ such that $a_{n} = f(n)$, that is, the algorithm merely outputs the advice bit(and indeed $a_{|x|} = f(|x|) = f'(x)$, for every $x \in \{0,1\}^{*}$)
+\end{proof}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\Huge{\centerline{The End}}
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 
